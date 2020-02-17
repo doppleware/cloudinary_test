@@ -2,7 +2,7 @@
 set -e
 cat /var/log/syslog | grep -oP "(?<=password to ').*(?=')"
 cd /opt/bitnami/apps/magento/htdocs
-if [ "$PUBLIC_KEY"=init ]; then echo here; fi
+if [ "$PUBLIC_KEY"="init" ]; then echo here; fi
 sudo sed "s/<public-key>/$PUBLIC_KEY/g" -i auth.json.sample
 sudo sed "s/<private-key>/$PRIVATE_KEY/g" -i auth.json.sample
 sudo cp auth.json.sample auth.json
