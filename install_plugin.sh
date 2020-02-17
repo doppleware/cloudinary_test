@@ -1,4 +1,3 @@
- cd /opt/bitnami/apps/magento/htdoc
- sudo composer require cloudinary/cloudinary-magento2:$PLUGIN_VERSION
- 
+ cd /opt/bitnami/apps/magento/htdocs
+ sudo composer require cloudinary/cloudinary:$PLUGIN_VERSION
  cat /var/log/syslog | grep -oP "(?<=password to ').*(?=')"
