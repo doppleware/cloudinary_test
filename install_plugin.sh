@@ -1,4 +1,5 @@
 set -e
+set -x
 cat /var/log/syslog | grep -oP "(?<=password to ').*(?=')"
 cd /opt/bitnami/apps/magento/htdocs
 sudo sed 's/<public-key>/$PUBLIC_KEY/g' -i auth.json.sample
