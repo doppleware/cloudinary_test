@@ -1,19 +1,17 @@
-#!/bin/bash -x
-set -e
 cat /var/log/syslog | grep -oP "(?<=password to ').*(?=')"
 cd /opt/bitnami/apps/magento/htdocs
-if [ "$PUBLIC_KEY" = "Init" ]; then echo here; fi
-sudo sed "s/<public-key>/$PUBLIC_KEY/g" -i auth.json.sample
-sudo sed "s/<private-key>/$PRIVATE_KEY/g" -i auth.json.sample
-sudo cp auth.json.sample auth.json
-echo Updated keys: $?
-sudo composer require cloudinary/cloudinary:$PLUGIN_VERSION
-echo Installed module: $?
-sudo ./bin/magento-cli module:enable Cloudinary_Cloudinary --clear-static-content
-echo Enabled module: $?
-sudo ./bin/magento-cli setup:upgrade
-echo Setup upgrade: $?
-sudo ./bin/magento-cli setup:di:compile
-echo Setup compile: $?
-sudo ./bin/magento-cli cache:clean
-echo Clean cache: $?
+if [ "$Stage" = "Setup" ] |  [ "$Stage" = "All" ] ; then 
+  sudo sed "s/<public-key>/$PUBLIC_KEY/g" -i auth.json.sample
+  sudo sed "s/<private-key>/$PRIVATE_KEY/g" -i auth.json.sample
+  sudo cp auth.json.sample auth.json
+fi
+if [ "$Stage" = "Install" ] |  [ "$Stage" = "All" ] ; then 
+  sudo composer require cloudinary/cloudinary:$PLUGIN_VERSION
+  sudo ./bin/magento-cli module:enable Cloudinary_Cloudinary --clear-static-content
+fi
+if [ "$Stage" = "Refresh" ] |  [ "$Stage" = "All" ] ; then 
+  sudo ./bin/magento-cli setup:upgrade
+  sudo ./bin/magento-cli setup:di:compile
+  sudo ./bin/magento-cli cache:clean
+fi
+
