@@ -2,7 +2,7 @@
 cat /var/log/syslog | grep -oP "(?<=password to ').*(?=')"
 cd /opt/bitnami/apps/magento/htdocs
 echo stage is: $Stage
-if [ "$Stage" = "Setup" ] 
+if [ "$Stage" = "Install" ] 
 then 
   sudo sed "s/<public-key>/$PUBLIC_KEY/g" -i auth.json.sample
   sudo sed "s/<private-key>/$PRIVATE_KEY/g" -i auth.json.sample
@@ -10,7 +10,7 @@ then
   sudo composer require cloudinary/cloudinary:$PLUGIN_VERSION
   echo Installed cloudinary/cloudinary:"$PLUGIN_VERSION" 
 fi
-if [ "$Stage" = "Install" ]
+if [ "$Stage" = "Enable" ]
 then 
   sudo ./bin/magento-cli module:enable Cloudinary_Cloudinary --clear-static-content
   echo Enabled plugin 
