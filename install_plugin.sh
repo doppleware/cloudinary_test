@@ -13,7 +13,7 @@ if [[ "$Stage" == "Install" ]] |  [[ "$Stage" == "All" ]] ; then
   sudo ./bin/magento-cli module:enable Cloudinary_Cloudinary --clear-static-content
 fi
 if [[ "$Stage" == "Refresh" ]] |  [[ "$Stage" == "All" ]] ; then 
-  echo doing refresh
+  echo doing refresh!
   sudo ./bin/magento-cli setup:upgrade
   sudo ./bin/magento-cli setup:di:compile
   sudo ./bin/magento-cli cache:clean
