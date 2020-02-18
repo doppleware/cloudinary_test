@@ -1,5 +1,6 @@
 cat /var/log/syslog | grep -oP "(?<=password to ').*(?=')"
 cd /opt/bitnami/apps/magento/htdocs
+echo stage is: $Stage
 if [ "$Stage" = "Setup" ] |  [ "$Stage" = "All" ] ; then 
   sudo sed "s/<public-key>/$PUBLIC_KEY/g" -i auth.json.sample
   sudo sed "s/<private-key>/$PRIVATE_KEY/g" -i auth.json.sample
