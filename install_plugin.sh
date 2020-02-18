@@ -1,5 +1,5 @@
 #!/bin/bash
-cat /var/log/syslog | grep -oP "(?<=password to ').*(?=')"
+cat /var/log/syslog | grep -oP "(?<=password to ').*(?=')" | awk '{print "[CS_Output]App Password: "$1"[/CS_OUTPUT]"}'
 cd /opt/bitnami/apps/magento/htdocs
 echo stage is: $Stage
 if [ "$Stage" = "Install" ] 
