@@ -21,7 +21,9 @@ if [ "$Stage" = "Refresh" ]
 then 
   sudo ./bin/magento-cli setup:upgrade
   sudo ./bin/magento-cli setup:di:compile
+  sudo ./bin/magento-cli setup:static-content:deploy
   sudo ./bin/magento-cli cache:clean
+  sudo ./bin/magento-cli cache:flush	
   echo Refreshed, Compiled and cleaned Cache
 fi
 
