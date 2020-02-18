@@ -1,7 +1,9 @@
 #!/bin/bash
-cat /var/log/syslog | grep -oP "(?<=password to ').*(?=')" | awk '{print "[CS_Output]App Password: "$1"[/CS_OUTPUT]"}'
 cd /opt/bitnami/apps/magento/htdocs
-echo stage is: $Stage
+if [ "$Stage" = "GetInfo" ] 
+then
+  cat /var/log/syslog | grep -oP "(?<=password to ').*(?=')" | awk '{print "App Password: "$1}'
+fi
 if [ "$Stage" = "Install" ] 
 then 
   sudo sed "s/<public-key>/$PUBLIC_KEY/g" -i auth.json.sample
