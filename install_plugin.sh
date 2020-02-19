@@ -2,7 +2,7 @@
 cd /opt/bitnami/apps/magento/htdocs
 if [ "$Stage" = "GetInfo" ] 
 then
-  cat /var/log/syslog | grep -oP "(?<=password to ').*(?=')" | awk '{print "App Password: "$1}'
+  cat /var/log/syslog | grep -oP "(?<=password to ').*(?=')" | awk '{print "<span style=\"background-color: #FFFF00; color:black;\">Magento Password:"$1"</span>"}'
 fi
 if [ "$Stage" = "Install" ] 
 then 
